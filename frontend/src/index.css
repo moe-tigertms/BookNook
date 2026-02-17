@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #0f0f12;
+  --surface: #18181c;
+  --border: #2a2a2e;
+  --muted: #71717a;
+  --accent: #a78bfa;
+  --accent-hover: #c4b5fd;
+  --danger: #f87171;
+  --success: #4ade80;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: #e4e4e7;
+  font-family: "DM Sans", system-ui, sans-serif;
+}
+
+button {
+  cursor: pointer;
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex cursor-pointer items-center justify-center gap-2 rounded-lg px-4 py-2 font-medium transition;
+  }
+  .btn-primary {
+    @apply bg-violet-500 text-white hover:bg-violet-600;
+  }
+  .btn-secondary {
+    @apply bg-zinc-700 text-zinc-200 hover:bg-zinc-600;
+  }
+  .btn-ghost {
+    @apply text-zinc-400 hover:bg-zinc-800 hover:text-white;
+  }
+  .btn-danger {
+    @apply bg-red-600 text-white hover:bg-red-700;
+  }
+  .input {
+    @apply w-full rounded-lg border border-zinc-600 bg-zinc-800/50 px-3 py-2 text-white placeholder-zinc-500 focus:border-violet-500 focus:outline-none focus:ring-1 focus:ring-violet-500;
+  }
+  .card {
+    @apply rounded-xl border border-zinc-800 bg-zinc-900/50 p-4 shadow-lg;
+  }
+}
