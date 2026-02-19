@@ -72,8 +72,13 @@ booksRouter.post(
       const body = bookSchema.parse(req.body);
       const book = await prisma.book.create({
         data: {
-          ...body,
-          coverUrl: body.coverUrl === "" ? null : body.coverUrl,
+          title: body.title,
+          author: body.author,
+          isbn: body.isbn ?? null,
+          genre: body.genre ?? null,
+          year: body.year ?? null,
+          description: body.description ?? null,
+          coverUrl: body.coverUrl === "" ? null : (body.coverUrl ?? null),
         },
       });
       res.status(201).json(book);
@@ -94,14 +99,21 @@ booksRouter.put(
   requireRole("admin", "librarian"),
   async (req, res, next) => {
     try {
-      const id = Array.isArray(req.params.id)
-        ? req.params.id[0]
-        : req.params.id;
+      const { id } = req.params;
+      if (!id || Array.isArray(id)) {
+        res.status(400).json({ error: "Invalid book id" });
+        return;
+      }
       const body = bookSchema.partial().parse(req.body);
       const book = await prisma.book.update({
         where: { id },
         data: {
-          ...body,
+          ...(body.title !== undefined && { title: body.title }),
+          ...(body.author !== undefined && { author: body.author }),
+          ...(body.isbn !== undefined && { isbn: body.isbn }),
+          ...(body.genre !== undefined && { genre: body.genre }),
+          ...(body.year !== undefined && { year: body.year }),
+          ...(body.description !== undefined && { description: body.description }),
           ...(body.coverUrl !== undefined && {
             coverUrl: body.coverUrl === "" ? null : body.coverUrl,
           }),
@@ -125,9 +137,11 @@ booksRouter.delete(
   requireRole("admin", "librarian"),
   async (req, res, next) => {
     try {
-      const id = Array.isArray(req.params.id)
-        ? req.params.id[0]
-        : req.params.id;
+      const { id } = req.params;
+      if (!id || Array.isArray(id)) {
+        res.status(400).json({ error: "Invalid book id" });
+        return;
+      }
       await prisma.book.delete({ where: { id } });
       res.status(204).send();
     } catch (e) {

@@ -22,7 +22,7 @@ aiRouter.get("/recommendations", async (req, res, next) => {
           ...b,
           isCheckedOut: b.checkouts.length > 0,
           reason: "Recently added",
-        }))
+        })),
       );
     }
     const book = await prisma.book.findUnique({ where: { id: bookId } });
@@ -86,7 +86,7 @@ aiRouter.get("/summary/:bookId", async (req, res, next) => {
       res.status(404).json({ error: "Book not found" });
       return;
     }
-    const key = process.env.GEMINI_API_KEY;
+    const key = process.env.GOOGLE_GEMINI_API_KEY;
     const fallback =
       book.description?.slice(0, 300) +
         (book.description && book.description.length > 300 ? "…" : "") ||
@@ -112,7 +112,7 @@ aiRouter.get("/summary/:bookId", async (req, res, next) => {
     let summary: string | null = null;
     try {
       const response = await ai.models.generateContent({
-        model: "gemini-2.5-pro",
+        model: "gemini-2.0-flash",
         contents: prompt,
         config: {
           maxOutputTokens: 150,

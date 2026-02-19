@@ -21,7 +21,7 @@ checkoutsRouter.get("/", async (req, res, next) => {
     }
     const isStaff = ["admin", "librarian"].includes(user.role);
     const checkouts = await prisma.checkout.findMany({
-      where: isStaff ? undefined : { userId: user.id },
+      where: isStaff ? {} : { userId: user.id },
       orderBy: { checkedOutAt: "desc" },
       include: { book: true, user: true },
     });
