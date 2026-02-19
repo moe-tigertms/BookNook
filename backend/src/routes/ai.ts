@@ -125,7 +125,10 @@ aiRouter.get("/summary/:bookId", async (req, res, next) => {
         summary = response.text?.trim() ?? null;
         break;
       } catch (geminiError) {
-        console.error(`Gemini attempt ${attempt}/${MAX_RETRIES} failed:`, geminiError);
+        console.error(
+          `Gemini attempt ${attempt}/${MAX_RETRIES} failed:`,
+          geminiError,
+        );
         if (attempt === MAX_RETRIES) {
           return res.status(502).json({
             error: "AI service error",
