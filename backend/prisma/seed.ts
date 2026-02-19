@@ -184,7 +184,7 @@ async function main() {
         genre: "Thriller",
         year: 2003,
         isbn: "978-0-385-50420-5",
-        coverUrl: openLibraryCover("978-0-385-50420-5"),
+        coverUrl: "https://covers.openlibrary.org/b/id/9255229-M.jpg",
         description: "A symbologist uncovers a conspiracy hidden in art and religion.",
       },
       {
