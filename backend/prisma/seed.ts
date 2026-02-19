@@ -112,7 +112,7 @@ async function main() {
         genre: "Fantasy",
         year: 1954,
         isbn: "978-0-544-04720-2",
-        coverUrl: openLibraryCover("978-0-544-04720-2"),
+        coverUrl: "https://covers.openlibrary.org/b/id/14625765-M.jpg",
         description: "An epic quest to destroy a powerful ring and save Middle-earth.",
       },
       {
@@ -148,7 +148,7 @@ async function main() {
         genre: "Dystopian",
         year: 1985,
         isbn: "978-0-385-49087-9",
-        coverUrl: openLibraryCover("978-0-385-49087-9"),
+        coverUrl: "https://covers.openlibrary.org/b/id/8231851-M.jpg",
         description: "A woman navigates a theocratic regime where women are subjugated.",
       },
       {
@@ -238,7 +238,7 @@ async function main() {
         genre: "Memoir",
         year: 2018,
         isbn: "978-0-399-59050-9",
-        coverUrl: openLibraryCover("978-0-399-59050-9"),
+        coverUrl: "https://covers.openlibrary.org/b/id/8314077-M.jpg",
         description: "A woman leaves her survivalist family and pursues education.",
       },
       {
@@ -256,7 +256,7 @@ async function main() {
         genre: "Science Fiction",
         year: 2021,
         isbn: "978-0-593-35909-9",
-        coverUrl: openLibraryCover("978-0-593-35909-9"),
+        coverUrl: "https://covers.openlibrary.org/b/id/11200092-M.jpg",
         description: "A lone astronaut must save Earth from an extinction-level threat.",
       },
     ],
