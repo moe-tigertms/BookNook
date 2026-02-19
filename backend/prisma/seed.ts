@@ -75,7 +75,7 @@ async function main() {
         genre: "Dystopian",
         year: 1932,
         isbn: "978-0-06-085052-4",
-        coverUrl: openLibraryCover("978-0-06-085052-4"),
+        coverUrl: "https://covers.openlibrary.org/b/id/8231823-M.jpg",
         description:
           "A futuristic society of genetic engineering and happiness.",
       },
