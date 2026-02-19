@@ -88,6 +88,23 @@ export function createAuthApi(getToken: () => Promise<string | null>) {
   return { me: () => request(getToken, "/auth/me") };
 }
 
+export interface PersonalizedResponse {
+  recommendations: Array<
+    BookFormData & {
+      id: string;
+      coverUrl?: string | null;
+      createdAt?: string;
+      updatedAt?: string;
+      isCheckedOut?: boolean;
+      reason: string;
+    }
+  >;
+  hasHistory: boolean;
+  aiGenerated?: boolean;
+  prompts?: string[];
+  message?: string;
+}
+
 export function createAiApi(getToken: () => Promise<string | null>) {
   return {
     recommendations: (bookId?: string, limit = 6) => {
@@ -96,6 +113,13 @@ export function createAiApi(getToken: () => Promise<string | null>) {
       return request(getToken, `/ai/recommendations?${params}`);
     },
     summary: (bookId: string) => request(getToken, `/ai/summary/${bookId}`),
+    personalized: (prompt?: string, limit = 6) => {
+      const params: Record<string, string> = { limit: String(limit) };
+      if (prompt) params.prompt = prompt;
+      return request<PersonalizedResponse>(getToken, "/ai/personalized", {
+        searchParams: params,
+      });
+    },
   };
 }
 
